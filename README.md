@@ -1,2 +1,2 @@
-# pixelSorteio
-Aplicação para sorteio de amigo secreto. 
+# Deploy
+Branch para deploy da aplicação no heroku
