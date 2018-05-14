@@ -23,7 +23,7 @@ Como usuário quero buscar por livros no ambiente do pixelbooks.
 - O grid deverá conter a miniatura dos itens encontrados. 
 - Caso seja encontrado nenhum resultado para os parametros de busca passados deverá ser exibido a mensagem "Nenhum item foi encontrado"
 
-### US.2 - Busca de livros
+### US.2 - Preenchimento do BD
 Como sistema quero popular o banco de dados a partir das consultas feitas à API da Amazon.
 
 #### Requisitos de aceitação
@@ -37,4 +37,31 @@ Como sistema quero popular o banco de dados a partir das consultas feitas à API
     - Genêro
     - foto miniatura
 - Não deverá existir itens duplicados no BD
-- Caso nada seja encontrado, nada deverá ser persistido 
+- Caso nada seja encontrado, nada deverá ser persistido
+
+### US.3 -Estante Virtual
+Como usuário ter uma estante virtual.  
+
+#### Requisitos de aceitação
+- Quero utilizar conceitos do real para modelar a estante virtual. 
+   - A estante deve conter Parateleiras.
+   - As Prateleiras podem conter livros ou estarem vazias.
+   - Esse conceito pode ser apenas visual
+
+### US.4 -Adicionar um livro a Estante Virtual
+Como usuário quero adicionar os livros que possuo a minha estante virtual. 
+
+#### Requisitos de aceitação
+- A adição dos livros na minha estante será atravéz da busca.
+- Ao buscar um livro deve aparecer uma opção de adicioná-lo à estante.
+- Se o livro buscado já fizer parte da minha estante devo sinalizá-lo, identificar que já está incluso. 
+- Só deve aparecer a opção de adicioná-lo à estante caso o livro não tenha sido adicionado previamente.
+
+### US.5 - Retirar um livro da Estante Virtual
+Como usuário quero remover livros da minha estante virtual. 
+
+#### Requisitos de aceitação
+- A adição dos livros na minha estante será atravéz da busca.
+- Ao buscar um livro deve aparecer uma opção de adicioná-lo à estante.
+- Se o livro buscado já fizer parte da minha estante devo sinalizá-lo, identificar que já está incluso. 
+- Só deve aparecer a opção de adicioná-lo à estante caso o livro não tenha sido adicionado previamente.
