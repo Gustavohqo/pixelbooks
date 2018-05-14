@@ -1,4 +1,4 @@
-package br.com.pixelbooks.pixelbooks;
+package br.com.pixelbooks.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
