@@ -1,23 +1,33 @@
 package br.com.pixelbooks.app.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 /**
  * Class that defines Book Entity
  */
-//@Entity
-public class Book {
+@Entity
+public class Book implements Serializable{
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
     private String author;
 
+    @Column
     private String link;
 
-    public Book(Long id, String name, String author, String link) {
-        this.id = id;
+    public Book() {}
+
+    public Book(String name, String author, String link) {
         this.name = name;
         this.author = author;
         this.link = link;

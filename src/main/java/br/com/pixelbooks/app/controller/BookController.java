@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/book")
@@ -19,16 +20,16 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Book>getBooks() {
+    public List<Book> getBooks() {
         return bookService.findBooks();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Book getBook(@PathVariable("id") Long id) {
+    public Optional<Book> getBook(@PathVariable("id") Long id) {
         return bookService.findBook(id);
     }
 
-    @RequestMapping(value = "/", headers="Content-Type=application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);

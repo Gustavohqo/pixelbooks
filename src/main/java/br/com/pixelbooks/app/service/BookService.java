@@ -1,27 +1,28 @@
 package br.com.pixelbooks.app.service;
 
 import br.com.pixelbooks.app.entity.Book;
-import br.com.pixelbooks.app.repository.BookRepositoryMock;
+import br.com.pixelbooks.app.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
     @Autowired
-    private BookRepositoryMock bookRepositoryMock;
+    private BookRepository bookRepository;
 
 
     public List<Book> findBooks() {
-        return bookRepositoryMock.findAll();
+        return bookRepository.findAll();
     }
 
-    public Book findBook(Long id) {
-        return bookRepositoryMock.findById(id);
+    public Optional<Book> findBook(Long id) {
+        return bookRepository.findById(id);
     }
 
     public Book saveBook(Book book) {
-        return bookRepositoryMock.save(book);
+        return bookRepository.save(book);
     }
 }
