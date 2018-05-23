@@ -36,10 +36,16 @@
 		</dependency>
 
 		<!-- H2 Database -->
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
+		</dependency>
+
+		<!--AWS AMAZON-->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+			<version>1.9.6</version>
 		</dependency>
 
 		<dependency>
