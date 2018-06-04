@@ -1,5 +1,7 @@
 package br.com.pixelbooks.app.entity;
 
+import br.com.pixelbooks.app.dto.ItemDTO;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,7 @@ public class Book implements Serializable{
     private Long id;
 
     @Column
-    private String name;
+    private String title;
 
     @Column
     private String author;
@@ -27,8 +29,14 @@ public class Book implements Serializable{
 
     public Book() {}
 
-    public Book(String name, String author, String link) {
-        this.name = name;
+    public Book(ItemDTO itemDTO) {
+        this.setAuthor(itemDTO.getItemAttributesDTO().getAuthor());
+        this.setTitle(itemDTO.getItemAttributesDTO().getTitle());
+        this.setLink(itemDTO.getUrl());
+    }
+
+    public Book(String title, String author, String link) {
+        this.title = title;
         this.author = author;
         this.link = link;
     }
@@ -41,12 +49,12 @@ public class Book implements Serializable{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {

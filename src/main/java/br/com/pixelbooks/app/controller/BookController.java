@@ -1,6 +1,7 @@
 package br.com.pixelbooks.app.controller;
 
 import br.com.pixelbooks.app.entity.Book;
+import br.com.pixelbooks.app.service.AWSService;
 import br.com.pixelbooks.app.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +24,7 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Book> getBooks() {
+    public List<Book> getBooks() throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
         return bookService.findBooks();
     }
 
