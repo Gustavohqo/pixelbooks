@@ -1,8 +1,10 @@
-package br.com.pixelbooks.app.dto;
+package br.com.pixelbooks.app.dto.awsDTO;
 
 import javax.xml.bind.annotation.*;
-import java.util.List;
 
+/**
+ *
+ */
 @XmlRootElement(name="ItemSearchResponse", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01" )
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemSearchResponseDTO {

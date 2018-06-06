@@ -1,6 +1,6 @@
 package br.com.pixelbooks.app.service;
 
-import br.com.pixelbooks.app.dto.ItemDTO;
+import br.com.pixelbooks.app.dto.awsDTO.ItemDTO;
 import br.com.pixelbooks.app.entity.Book;
 import br.com.pixelbooks.app.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +21,31 @@ public class BookService {
     @Autowired
     private AWSService awsService;
 
-    public List<Book> findBooks() throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
-        List<ItemDTO> itemsFound = awsService.searchBookByTitle("black hammer");
-
-        List<Book> books = this.itemsToBooks(itemsFound);
-        books.addAll(bookRepository.findAll());
-        return books;
-    }
+    public List<Book> findBooks() { return bookRepository.findAll(); }
 
     public Optional<Book> findBook(Long id) {
         return bookRepository.findById(id);
     }
 
+    public List<Book> findBookByTitle(String title) {
+        List<ItemDTO> itemsFound = awsService.searchBookByTitle(title);
+        List<Book> books = this.itemsToBooks(itemsFound);
+        books.addAll(bookRepository.findByTitle(title));
+
+        return books;
+    }
+
+
     public Book saveBook(Book book) {
         return bookRepository.save(book);
     }
 
-
+    /**
+     * Transform a List of {@link ItemDTO} to a List of {@link Book}
+     *
+     * @param items the list of {@link ItemDTO} to be transformed.
+     * @return a List of {@link Book} that corresponding to the list received.
+     */
     private List<Book> itemsToBooks(List<ItemDTO> items) {
         List<Book> books = new ArrayList<>();
         for(ItemDTO item : items) {

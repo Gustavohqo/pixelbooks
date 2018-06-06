@@ -1,9 +1,13 @@
-package br.com.pixelbooks.app.dto;
+package br.com.pixelbooks.app.dto.awsDTO;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
+/**
+ * Describes an Amazon Item, these attributes are relevant data about
+ * books.
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemAttributesDTO {
 

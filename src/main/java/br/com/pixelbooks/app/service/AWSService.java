@@ -1,9 +1,10 @@
 package br.com.pixelbooks.app.service;
 
-import br.com.pixelbooks.app.dto.ItemDTO;
-import br.com.pixelbooks.app.dto.ItemSearchResponseDTO;
-import br.com.pixelbooks.app.dto.ItemsDTO;
+import br.com.pixelbooks.app.dto.awsDTO.ItemDTO;
+import br.com.pixelbooks.app.dto.awsDTO.ItemSearchResponseDTO;
+import br.com.pixelbooks.app.dto.awsDTO.ItemsDTO;
 import br.com.pixelbooks.app.util.SignedRequestsHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -16,7 +17,6 @@ import java.net.URI;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-
 
 /**
  * Service responsable for consume Amazon Product
@@ -35,12 +35,19 @@ public class AWSService {
     @Value("${aws.base.uri}")
     private String baseURI;
 
-    public List<ItemDTO> searchBookByTitle(String title) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+    public List<ItemDTO> searchBookByTitle(String title) {
         RestTemplate restTemplate = new RestTemplate();
         SignedRequestsHelper helper = null;
 
+        try {
             helper = SignedRequestsHelper.getInstance(baseURI, accessKey, privateKey);
-
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
 
         Map<String, String> params = new HashMap<String, String>();
 
@@ -64,6 +71,6 @@ public class AWSService {
 
         ItemsDTO itemsDTO = searchResponse.getBody().getItemsDTO();
 
-        return itemsDTO.getItem();
+        return itemsDTO == null ? new ArrayList<ItemDTO>() : itemsDTO.getItem();
     }
 }

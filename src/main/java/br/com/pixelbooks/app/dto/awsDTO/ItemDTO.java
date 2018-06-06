@@ -1,12 +1,13 @@
-package br.com.pixelbooks.app.dto;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+package br.com.pixelbooks.app.dto.awsDTO;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Class that maps an Amazon Item, this Item in specific
+ * has attributes of a book.
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemDTO {
 
@@ -44,6 +45,18 @@ public class ItemDTO {
     public void setItemAttributesDTO(ItemAttributesDTO itemAttributesDTO) {
         this.itemAttributesDTO = itemAttributesDTO;
     }
+
+    public String getAuthor() { return itemAttributesDTO.getAuthor(); }
+
+    public String getIsbn() { return itemAttributesDTO.getIsbn(); }
+
+    public String getPublisher() { return itemAttributesDTO.getPublisher(); }
+
+    public String getTitle() { return itemAttributesDTO.getTitle(); }
+
+    public Integer getNumberOfPages() { return itemAttributesDTO.getNumberOfPages(); }
+
+    public String getReleaseDate() { return itemAttributesDTO.getReleaseDate(); }
 
     @Override
     public String toString() {
