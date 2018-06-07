@@ -35,7 +35,7 @@ public class AWSService {
     @Value("${aws.base.uri}")
     private String baseURI;
 
-    public List<ItemDTO> searchBookByTitle(String title) {
+    public List<ItemDTO> searchBookByTitle(String param) {
         RestTemplate restTemplate = new RestTemplate();
         SignedRequestsHelper helper = null;
 
@@ -57,7 +57,7 @@ public class AWSService {
         params.put("AssociateTag", associateTag);
         params.put("SearchIndex", "Books");
         params.put("ResponseGroup", "ItemAttributes");
-        params.put("Title", title);
+        params.put("Keywords", param);
 
         String url = helper.sign(params);
         System.out.println("Signed URL:" + url );

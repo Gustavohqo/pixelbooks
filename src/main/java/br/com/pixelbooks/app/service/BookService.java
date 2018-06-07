@@ -27,10 +27,18 @@ public class BookService {
         return bookRepository.findById(id);
     }
 
-    public List<Book> findBookByTitle(String title) {
-        List<ItemDTO> itemsFound = awsService.searchBookByTitle(title);
+    /**
+     * It seeks by a book using a keyword that must be the Title, Author or
+     * ISBN number.
+     *
+     * @param keyword as a {@link String} thaa will be searched
+     * @return {@link List<Book>} containing the books found. It can be empty
+     *          if no book be found.
+     */
+    public List<Book> findBookByKeyword(String keyword) {
+        List<ItemDTO> itemsFound = awsService.searchBookByTitle(keyword);
         List<Book> books = this.itemsToBooks(itemsFound);
-        books.addAll(bookRepository.findByTitle(title));
+        books.addAll(bookRepository.findBooksByTitleOrAuthorOrIsbn(keyword));
 
         return books;
     }
@@ -41,10 +49,10 @@ public class BookService {
     }
 
     /**
-     * Transform a List of {@link ItemDTO} to a List of {@link Book}
+     * Transform a {@link List<ItemDTO>} to a {@link List<Book>}
      *
-     * @param items the list of {@link ItemDTO} to be transformed.
-     * @return a List of {@link Book} that corresponding to the list received.
+     * @param items the @link List<ItemDTO>} to be transformed.
+     * @return a {@link List<Book>} that corresponding to the list received.
      */
     private List<Book> itemsToBooks(List<ItemDTO> items) {
         List<Book> books = new ArrayList<>();
