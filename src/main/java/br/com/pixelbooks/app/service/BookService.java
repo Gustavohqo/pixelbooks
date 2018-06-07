@@ -38,7 +38,7 @@ public class BookService {
     public List<Book> findBookByKeyword(String keyword) {
         List<ItemDTO> itemsFound = awsService.searchBookByTitle(keyword);
         List<Book> books = this.itemsToBooks(itemsFound);
-        books.addAll(bookRepository.findBooksByTitleOrAuthorOrIsbn(keyword));
+        books.addAll(bookRepository.findBooksByTitleOrAuthorOrIsbn(keyword, keyword, keyword));
 
         return books;
     }
