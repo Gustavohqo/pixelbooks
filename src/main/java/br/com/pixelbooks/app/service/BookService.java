@@ -6,9 +6,6 @@ import br.com.pixelbooks.app.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,23 +20,30 @@ public class BookService {
 
     public List<Book> findBooks() { return bookRepository.findAll(); }
 
-    public Optional<Book> findBook(Long id) {
+    public Optional<Book> findBookById(Long id) {
         return bookRepository.findById(id);
     }
 
+    public Optional<Book> findBookByIsbn(String isbn) { return bookRepository.findByIsbn(isbn); }
+
     /**
      * It seeks by a book using a keyword that must be the Title, Author or
-     * ISBN number.
+     * ISBN number. It can search at Amazon Advertise Product API, but only if
+     * no book was found at BD OR if explicitly said so.
      *
-     * @param keyword as a {@link String} thaa will be searched
+     * @param keyword as a {@link String} that will be searched.
+     * @param loadMore as a {@link Boolean} that allows AAPAPI be called.
      * @return {@link List<Book>} containing the books found. It can be empty
      *          if no book be found.
      */
-    public List<Book> findBookByKeyword(String keyword) {
-        List<ItemDTO> itemsFound = awsService.searchBookByTitle(keyword);
-        List<Book> books = this.itemsToBooks(itemsFound);
-        books.addAll(bookRepository.findBooksByTitleOrAuthorOrIsbn(keyword, keyword, keyword));
+    public List<Book> findBookByKeyword(String keyword, Boolean loadMore) {
+        List<Book> books = bookRepository.findAllBooksContainingKeyword(keyword);
 
+        if(books.isEmpty() || loadMore) {
+            List<ItemDTO> itemsFound = awsService.searchBookByTitle(keyword);
+            List<Book> allBooksFind = this.itemsToBooks(itemsFound);
+            books.addAll(allBooksFind);
+        }
         return books;
     }
 
@@ -56,8 +60,11 @@ public class BookService {
      */
     private List<Book> itemsToBooks(List<ItemDTO> items) {
         List<Book> books = new ArrayList<>();
-        for(ItemDTO item : items) {
-            books.add(new Book(item));
+
+        if (items != null) {
+            for(ItemDTO item : items) {
+                books.add(new Book(item));
+            }
         }
 
         return books;

@@ -4,12 +4,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Class that defines User Entity
  */
-public class User {
+@Entity
+public class User implements Serializable {
 
     @Id
     @GeneratedValue
@@ -25,6 +28,7 @@ public class User {
     private String password;
 
     @Column
+    @OneToMany
     private List<Book> featuredBooks;
 
     public User() {}

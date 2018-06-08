@@ -15,23 +15,23 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/book")
+@RequestMapping(value = "/book", headers="Content-Type=application/json")
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Book> getBooks(@RequestParam String search) {
-        return bookService.findBookByKeyword(search);
+    public List<Book> searchBooks(@RequestParam String search, @RequestParam(required = false, defaultValue = "false") Boolean loadMore) {
+        return bookService.findBookByKeyword(search, loadMore);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Optional<Book> getBook(@PathVariable("id") Long id) {
-        return bookService.findBook(id);
+        return bookService.findBookById(id);
     }
 
-    @RequestMapping(value = "", headers="Content-Type=application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);
