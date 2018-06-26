@@ -7,28 +7,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/book")
 public class BookController {
+
     @Autowired
     private BookService bookService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public List<Book>getBooks() {
-        return bookService.findBooks();
+    public List<Book> searchBooks(@RequestParam String search, @RequestParam(required = false, defaultValue = "false") Boolean loadMore) {
+        return bookService.findBookByKeyword(search, loadMore);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Book getBook(@PathVariable("id") Long id) {
-        return bookService.findBook(id);
+    public Optional<Book> getBook(@PathVariable("id") Long id) {
+        return bookService.findBookById(id);
     }
 
-    @RequestMapping(value = "/", headers="Content-Type=application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST, headers="Content-Type=application/json")
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);
