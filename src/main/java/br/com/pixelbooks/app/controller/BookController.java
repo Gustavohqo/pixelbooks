@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/book", headers="Content-Type=application/json")
+@RequestMapping(value = "/book")
 public class BookController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "", method = RequestMethod.POST, headers="Content-Type=application/json")
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);
