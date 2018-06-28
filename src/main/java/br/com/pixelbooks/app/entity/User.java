@@ -1,6 +1,7 @@
 package br.com.pixelbooks.app.entity;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,10 +23,16 @@ public class User implements Serializable {
     private String name;
 
     @Column
+    private String username;
+
+    @Column
     private String email;
 
     @Column
     private String password;
+
+    @ElementCollection
+    private List<Role> roles;
 
     @Column
     @OneToMany
@@ -49,6 +56,10 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public String getUsername() { return username; }
+
+    public void setUsername(String username) { this.username = username; }
+
     public String getEmail() {
         return email;
     }
@@ -63,6 +74,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public List<Book> getFeaturedBooks() {
