@@ -31,7 +31,7 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
-    @RequestMapping(method = RequestMethod.POST, headers="Content-Type=application/json")
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);
