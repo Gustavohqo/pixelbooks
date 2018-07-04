@@ -30,7 +30,7 @@ public class JwtTokenProvider {
     private String securityKey;
 
     @Value("${security.jwt.token.expire-length}")
-    private String expirationLength;
+    private Long expirationLength;
 
     @Autowired
     private MyUserDetails myUserDetails;
@@ -47,7 +47,8 @@ public class JwtTokenProvider {
                 filter(Objects::nonNull).collect(Collectors.toList()));
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + expirationLength);
+        Date validity = new Date();
+        validity.setTime(now.getTime() + expirationLength);
 
         return Jwts.builder()
                 .setClaims(claims)

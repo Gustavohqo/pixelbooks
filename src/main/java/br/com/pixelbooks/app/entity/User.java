@@ -3,6 +3,7 @@ package br.com.pixelbooks.app.entity;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,16 +23,16 @@ public class User implements Serializable {
     @Column
     private String name;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String username;
 
     @Column
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<Role> roles;
 
     @Column
