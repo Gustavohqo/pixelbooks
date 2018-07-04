@@ -21,7 +21,7 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public List<Book> searchBooks(@RequestParam String search, @RequestParam(required = false, defaultValue = "false") Boolean loadMore) {
         return bookService.findBookByKeyword(search, loadMore);
     }
@@ -31,7 +31,7 @@ public class BookController {
         return bookService.findBookById(id);
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, headers="Content-Type=application/json")
+    @RequestMapping(method = RequestMethod.POST, headers="Content-Type=application/json")
     @ResponseBody
     public Book save(@RequestBody Book book) {
         return bookService.saveBook(book);
