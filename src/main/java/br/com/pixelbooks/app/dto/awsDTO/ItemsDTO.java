@@ -12,10 +12,10 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemsDTO {
 
-    @XmlElement(name = "TotalResults")
+    @XmlElement(name = "TotalResults", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private Integer totalResults;
 
-    @XmlElement(name = "Item")
+    @XmlElement(name = "Item", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private List<ItemDTO> item;
 
     public ItemsDTO() {}

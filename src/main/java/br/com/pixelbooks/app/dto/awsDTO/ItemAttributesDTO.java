@@ -11,22 +11,22 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemAttributesDTO {
 
-    @XmlElement(name = "Author")
+    @XmlElement(name = "Author", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String author;
 
-    @XmlElement(name = "ISBN")
+    @XmlElement(name = "ISBN", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String isbn;
 
-    @XmlElement(name = "NumberOfPages")
+    @XmlElement(name = "NumberOfPages", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private Integer numberOfPages;
 
-    @XmlElement(name = "Publisher")
+    @XmlElement(name = "Publisher", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String publisher;
 
-    @XmlElement(name = "Title")
+    @XmlElement(name = "Title", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String title;
 
-    @XmlElement(name = "ReleaseDate")
+    @XmlElement(name = "ReleaseDate", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String releaseDate;
 
     public ItemAttributesDTO() { }

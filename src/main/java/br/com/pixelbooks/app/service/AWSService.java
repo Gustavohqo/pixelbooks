@@ -4,7 +4,6 @@ import br.com.pixelbooks.app.dto.awsDTO.ItemDTO;
 import br.com.pixelbooks.app.dto.awsDTO.ItemSearchResponseDTO;
 import br.com.pixelbooks.app.dto.awsDTO.ItemsDTO;
 import br.com.pixelbooks.app.util.SignedRequestsHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -16,7 +15,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Service responsable for consume Amazon Product

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemSearchResponseDTO {
 
-    @XmlElement(name = "Items")
+    @XmlElement(name = "Items", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private ItemsDTO itemsDTO;
 
     public ItemSearchResponseDTO() { }
