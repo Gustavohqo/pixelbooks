@@ -3,3 +3,7 @@
 target/
 
 src/main/resources/PAAPICredentials.csv
+
+
+# client
+client/node_modules/
