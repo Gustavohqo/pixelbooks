@@ -1,0 +1,29 @@
+<div class="login-component" fxLayout="column" fxLayoutAlign="center">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+    <mat-toolbar class="login-card-header" color="primary" fxLayoutAlign="center"> 
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div>Pixelbooks</div>
+      </div> 
+    </mat-toolbar>
+  </div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center">
+    <mat-card class="login-card">
+      <mat-card-content>
+        <!-- Ipunts -->
+        <form class="login-form">
+          <mat-form-field class="input-login-form">
+            <input matInput type="email" placeholder="e-mail">
+          </mat-form-field>
+          <mat-form-field class="input-login-form">
+            <input matInput type="password" placeholder="password">
+          </mat-form-field>
+    
+          <!-- Button Sign in -->
+          <div fxLayout="row wrap" fxLayoutAlign="center stretch">
+            <button mat-flat-button class="button-login">Sign In</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

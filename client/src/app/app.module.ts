@@ -1,15 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+
+import { appRoutes } from './app.router';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-
+import { LoginComponent } from './components/login/login.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,15 +17,14 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatIconModule,
+    FlexLayoutModule,
     MatCardModule,
-    MatGridListModule
+    MatFormFieldModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [],
   bootstrap: [AppComponent]

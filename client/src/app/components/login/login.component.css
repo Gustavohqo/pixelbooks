@@ -1,0 +1,35 @@
+.login-component {
+    height: 100%;
+    margin: auto;
+}
+
+.login-card {
+    min-width: 400px;
+    min-height: 250px;
+}
+
+.subtitle {
+    font-size: 16px
+}
+
+.login-card-header {
+    width: 450px;
+}
+
+.login-form {
+    min-width: 300px;
+    max-width: 400px;
+    min-height: 200px;
+    max-height: 300px;
+    width: 100%;
+}
+
+.input-login-form {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.button-login {
+    margin-top: 40px;
+    width: 100%;
+}
