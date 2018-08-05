@@ -20,6 +20,8 @@
  */
 package br.com.pixelbooks.app.util;
 
+import org.apache.tomcat.util.codec.binary.Base64;
+
 import java.io.UnsupportedEncodingException;
 
 import java.net.URLDecoder;
@@ -42,7 +44,6 @@ import java.util.TreeMap;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
  * This class contains all the logic for signing requests
