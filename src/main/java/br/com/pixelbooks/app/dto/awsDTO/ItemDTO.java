@@ -11,13 +11,13 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemDTO {
 
-    @XmlElement(name = "ASIN")
+    @XmlElement(name = "ASIN", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String asin;
 
-    @XmlElement(name = "DetailPageURL")
+    @XmlElement(name = "DetailPageURL", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private String url;
 
-    @XmlElement(name = "ItemAttributes")
+    @XmlElement(name = "ItemAttributes", namespace="http://webservices.amazon.com/AWSECommerceService/2011-08-01")
     private ItemAttributesDTO itemAttributesDTO;
 
     public ItemDTO() {}
