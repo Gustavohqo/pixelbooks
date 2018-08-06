@@ -19,13 +19,21 @@ export class UserService {
   }
 
   public login(user) {
-    const req = this.http.post(this.globalURL + "user/signin", user, {headers: this.headers});
-    const sub = req.subscribe(
-      next => this.$user.next(next)
-    );
+    const observable = this.http.post(this.globalURL + "user/signin", user, {headers: this.headers})
 
+    observable.subscribe(
+        next => {
+          next["username"] = user.username;
+          console.log(next);
+          this.globalService.storeCurrentUser(next);
+        }
+      );
 
-    return this.$user;
+    return observable;
   }
 
+
+  public isAuthenticated(){
+    return this.globalService.getAccessToken();
+  }
 }

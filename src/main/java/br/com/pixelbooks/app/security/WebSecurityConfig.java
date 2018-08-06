@@ -3,6 +3,7 @@ package br.com.pixelbooks.app.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,9 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Entry points
         http.authorizeRequests()//
-                .antMatchers("/user/signin").permitAll()//
-                .antMatchers("/user/signup").permitAll()//
-                .antMatchers("/book").permitAll()//
+                .antMatchers("/user/signin").permitAll()
+                .antMatchers("/user/signup").permitAll()
+                .antMatchers(HttpMethod.GET, "/book").permitAll()
+                .antMatchers(HttpMethod.POST, "/book").hasRole("ADMIN")
                 // Disallow everything else..
                 .anyRequest().authenticated();
 
