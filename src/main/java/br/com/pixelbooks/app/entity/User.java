@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * Class that defines User Entity
  */
 @Entity
+@Table(name="TB_USER")
 public class User implements Serializable {
 
     @Id
@@ -26,7 +28,7 @@ public class User implements Serializable {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)

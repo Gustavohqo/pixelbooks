@@ -12,15 +12,15 @@
         <!-- Ipunts -->
         <form class="login-form">
           <mat-form-field class="input-login-form">
-            <input matInput type="email" placeholder="e-mail">
+            <input matInput type="text" placeholder="username" [(ngModel)]="user.username" name="email">
           </mat-form-field>
           <mat-form-field class="input-login-form">
-            <input matInput type="password" placeholder="password">
+            <input matInput type="password" placeholder="password" [(ngModel)]="user.password" name="password">
           </mat-form-field>
     
           <!-- Button Sign in -->
           <div fxLayout="row wrap" fxLayoutAlign="center stretch">
-            <button mat-flat-button class="button-login">Sign In</button>
+            <button mat-flat-button (click)="singin()" class="button-login">Sign In</button>
           </div>
         </form>
       </mat-card-content>

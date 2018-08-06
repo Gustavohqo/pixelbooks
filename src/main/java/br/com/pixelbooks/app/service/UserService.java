@@ -1,13 +1,13 @@
 package br.com.pixelbooks.app.service;
 
+import br.com.pixelbooks.app.dto.authentication.AuthenticationDTO;
+import br.com.pixelbooks.app.dto.user.UserSigninDTO;
 import br.com.pixelbooks.app.entity.User;
 import br.com.pixelbooks.app.exception.CustomException;
 import br.com.pixelbooks.app.repository.UserRepository;
 import br.com.pixelbooks.app.security.JwtTokenProvider;
 
-import org.hibernate.service.spi.InjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +30,7 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public String signin(User user) {
+    public AuthenticationDTO signin(UserSigninDTO user) {
         String username = user.getUsername();
         String password = user.getPassword();
         try {
@@ -42,7 +42,7 @@ public class UserService {
         }
     }
 
-    public String signup(User user) {
+    public AuthenticationDTO signup(User user) {
         if(!userRepository.existsByUsername(user.getUsername())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);

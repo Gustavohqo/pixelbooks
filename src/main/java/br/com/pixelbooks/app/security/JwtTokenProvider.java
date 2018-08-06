@@ -1,5 +1,6 @@
 package br.com.pixelbooks.app.security;
 
+import br.com.pixelbooks.app.dto.authentication.AuthenticationDTO;
 import br.com.pixelbooks.app.entity.Role;
 import br.com.pixelbooks.app.exception.CustomException;
 import io.jsonwebtoken.Claims;
@@ -40,7 +41,7 @@ public class JwtTokenProvider {
         securityKey = Base64.getEncoder().encodeToString(securityKey.getBytes());
     }
 
-    public String createToken(String username, List<Role> roles) {
+    public AuthenticationDTO createToken(String username, List<Role> roles) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("auth", roles.stream().map(s ->
                 new SimpleGrantedAuthority(s.getAuthority())).
@@ -50,12 +51,19 @@ public class JwtTokenProvider {
         Date validity = new Date();
         validity.setTime(now.getTime() + expirationLength);
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, securityKey)
-                .compact();
+        AuthenticationDTO authToken = new AuthenticationDTO();
+
+        authToken.setCreateDate(now.toString());
+        authToken.setExpirationDate(validity.toString());
+        authToken.setToken(
+                Jwts.builder()
+                        .setClaims(claims)
+                        .setIssuedAt(now)
+                        .setExpiration(validity)
+                        .signWith(SignatureAlgorithm.HS256, securityKey)
+                        .compact()
+        );
+        return authToken;
     }
 
     public Authentication getAuthentication(String token) {
