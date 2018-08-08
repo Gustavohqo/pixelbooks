@@ -1,0 +1,32 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.books-search {
+  width: 90%;
+  margin: 2em auto;
+}
+
+.input-search-form {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.icon-search {
+  font-size: 20px;
+}
+
+.books-grid {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255, 182, 82);
+}
+
+.book-capsule {
+  margin: 5px auto;
+  width: 30%;
+}
+
+.book-card {
+  height: 100px;
+}

@@ -2,9 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatToolbarModule } from '@angular/material';
+import {
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatIconModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import { FormsModule } from "@angular/forms";
 
 import { appRoutes } from './app.router';
@@ -17,6 +24,8 @@ import { StorageService } from "./service/storage.service";
 import { GlobalService } from "./service/global.service";
 import { UserService } from "./service/user.service";
 import { AuthService } from "./service/auth.service";
+import {HeaderTokenInterceptor} from "./service/interceptor/handle-header-token-interceptor";
+import {BookService} from "./service/book.service";
 
 @NgModule({
   declarations: [
@@ -35,13 +44,20 @@ import { AuthService } from "./service/auth.service";
     MatToolbarModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderTokenInterceptor,
+      multi: true
+    },
     StorageService,
     GlobalService,
     UserService,
-    AuthService
+    AuthService,
+    BookService
   ],
   bootstrap: [AppComponent]
 })

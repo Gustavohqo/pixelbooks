@@ -1,3 +1,36 @@
-<p>
-  user-details works!
-</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Pixelbooks</span>
+    <span class="spacer"></span>
+    <button mat-flat-button (click)="logout()">logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="books-search">
+  <form (keydown.enter)="bookSearch()">
+    <mat-card>
+      <mat-form-field class="input-search-form">
+        <mat-icon matPrefix class="icon-search">search</mat-icon>
+        <input matInput type="text" name="searchParam" [(ngModel)]="searchParam"
+               placeholder="Pesquise pelo Título do livro ou Autor" />
+      </mat-form-field>
+    </mat-card>
+  </form>
+
+  <div fxLayout="row wrap" fxFlexAlign="center space-around"
+       fxLayoutGap="20px"
+       class="books-grid">
+    <div *ngFor="let book of books" class="book-capsule">
+      <mat-card class="book-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{book.title}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{book.author}}
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

@@ -7,8 +7,8 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 
-import { Observable } from 'rxjs/Rx';
 import { UserService } from './user.service'
+import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthService implements CanActivate {
@@ -19,17 +19,9 @@ export class AuthService implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    console.log(JSON.stringify(route, null, 2));
-    if (this.userService.isAuthenticated()) {
-      if (state.url === "/register"){
-        this.router.navigate(['/']);
-        return false;
-      }
-    } else {
-      if (state.url !== "/register") {
-        this.router.navigate(['/register']);
-        return false;
-      }
+    if (! this.userService.isAuthenticated()) {
+      this.router.navigate(['/']);
+      return false;
     }
 
     return true;

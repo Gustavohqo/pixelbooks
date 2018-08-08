@@ -6,32 +6,34 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class UserService {
 
-  private $user: Subject<{}> = new Subject();
+  private $auth: Subject<{}> = new Subject();
   private headers;
   private globalURL;
 
+
+
   constructor(private globalService : GlobalService,
               private http : HttpClient) {
-
-    this.headers = new HttpHeaders();
-    this.headers.set('Content-Type', 'application/json');
     this.globalURL = this.globalService.getServerURL();
   }
 
   public login(user) {
-    const observable = this.http.post(this.globalURL + "user/signin", user, {headers: this.headers})
+    const observable = this.http.post(this.globalURL + "user/signin", user, {headers: this.headers});
 
     observable.subscribe(
         next => {
           next["username"] = user.username;
-          console.log(next);
           this.globalService.storeCurrentUser(next);
+          this.$auth.next(next);
         }
       );
 
-    return observable;
+    return this.$auth;
   }
 
+  public getUser() {
+    return this.http.get(this.globalURL + "user/" + this.globalService.getUsername());
+  }
 
   public isAuthenticated(){
     return this.globalService.getAccessToken();

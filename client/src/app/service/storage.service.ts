@@ -11,7 +11,7 @@ export class StorageService {
   }
 
   public getAccessToken() {
-    return localStorage.getItem('access-token');
+    return localStorage.getItem('access_token');
   }
 
   public getUsername () {
